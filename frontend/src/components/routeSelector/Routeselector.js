@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
+import moment from "moment";
 import './Routeselector.css'
 import * as apiCall from './routeApifunc'
 import BusList from '../BusList/BusList'
-export default function Routeselector() {
+export default function Routeselector({changeRoute}) {
+
     const [dataInp, setData] = useState("")
     const [startCity, setStartCity] = useState('')
     const [destination, setDestination] = useState('')
+    const [date,setDate] = useState('');
     const handleToCity = e => {
         e.preventDefault()
         setDestination({ destination: e.target.value })
@@ -13,7 +16,7 @@ export default function Routeselector() {
     }
     const renderBusList = (dataInp) => {
         if (Object.keys(dataInp).length > 0) {
-            return (<BusList value={dataInp} />)
+            return (<BusList changeRoute = {changeRoute} value={dataInp} />)
         }
     }
     const handleFromCity = e => {
@@ -26,7 +29,7 @@ export default function Routeselector() {
     const getRoutes = e => {
         e.preventDefault()
         // console.log(startCity,destination)
-        apiCall.getRoutesFromApi(startCity.startCity, destination.destination)
+        apiCall.getRoutesFromApi(startCity.startCity, destination.destination, date.date)
             .then(response => response.data)
             .then(data => {
                 setData(data.bus)
@@ -36,7 +39,12 @@ export default function Routeselector() {
     const handleDate = e => {
         e.preventDefault()
         //    console.log(e.target.value)
+        // const d = e.target.value;
+        // moment(d).format('DD/MM/YYYY');
+        // console.log(d); 
+        console.log(e.target.value)
         localStorage.setItem("date", e.target.value)
+        setDate({date : e.target.value})
     }
     
     return (

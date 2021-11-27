@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { FaAngleDoubleDown } from "react-icons/fa";
 import './Tab.css'
+import {useHistory} from "react-router-dom"
 export default function SeatSelection() {
     const [name, setName] = useState([])
     const [arrowDown, setArrowDown] = useState(false)
     const [gender, setGender] = useState([])
     const [reservedSeat, setReservedSeat] = useState(["1A", "2A", "2B", "3B", "4A", "5C", "6A", "7B", "7C", '8B', "9B", "9C"])
+    const history = useHistory();
     const [seatNumber, setSeatnumber] = useState([])
     // const [passengers, setPassengers] = useState([])
     // useEffect(()=>{
@@ -62,6 +64,7 @@ export default function SeatSelection() {
         localStorage.setItem("nameData", JSON.stringify(name))
         console.log(name)
         console.log(gender)
+        history.push('/routes/menu2')        
     }
 
     const renderPassengerData = (seatArray) => {

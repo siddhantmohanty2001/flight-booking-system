@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import RouteSelector from '../routeSelector/Routeselector'
 import SeatSelection from '../SeatSelection/SeatSelection'
 import PaymentTab from '../PaymentTab/PaymentTab'
 
-export default function RouteSelection({ history }) {
+export default function RouteSelection({ history}) {
+
+    //change Route
+    const changeRoute = useRef(null)
 
     const handleUserIcon = e => {
         e.preventDefault()
@@ -47,7 +50,7 @@ export default function RouteSelection({ history }) {
             <div>
                 <ul className="nav nav-pills">
                     <li className="nav-item">
-                        <a className="nav-link active" data-toggle="pill" href="#home">Select Bus</a>
+                        <a className="nav-link active" data-toggle="pill" href="#home" ref={changeRoute}>Select Bus</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link " data-toggle="pill" href="#menu1">Select Seat</a>
@@ -58,7 +61,7 @@ export default function RouteSelection({ history }) {
                 </ul>
 
                 <div className="tab-content">
-                    <div className="tab-pane container active mn-box" id="home"><RouteSelector /></div>
+                    <div className="tab-pane container active mn-box" id="home"><RouteSelector changeRoute={changeRoute}/></div>
                     <div className="tab-pane container fade mn-box" id="menu1"><SeatSelection /></div>
                     <div className="tab-pane container fade mn-box" id="menu2"><PaymentTab /></div>
                 </div>

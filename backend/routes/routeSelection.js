@@ -12,7 +12,7 @@ var bus = require('../models/Buses');
 
 router.post('/', (req, res) => {
 
-    bus.find({ 'startCity': req.body.startCity, 'destination': req.body.destination }).exec((err, bus) => {
+    bus.find({ 'startCity': req.body.startCity, 'destination': req.body.destination, 'date': req.body.date }).exec((err, bus) => {
         if (err) {
             res.json({ status: false, message: "error while searching" })
         }
